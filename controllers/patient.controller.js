@@ -42,7 +42,7 @@ const registerPatient = async (req, res) => {
       });
       await psychiatrist.save();
       psychiatristId = await Psychiatrist.find({psychiatristName:psychiatristName});
-      psychiatristId=psychiatristId._id;
+      psychiatristId=psychiatristId[0]._id;
       console.log(psychiatristId,"else pscy");
     }
     const patient = new Patient({
