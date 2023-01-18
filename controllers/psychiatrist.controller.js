@@ -6,16 +6,16 @@ const getAllpsychiatrists=async(req,res)=>{
     const {hospitalId}=req.body;
     console.log(hospitalId);
     try {
+        //find all the related information which we have to pass to response
         const hospitalDetails= await Hospital.find({_id:hospitalId});
-        // console.log(hospitalDetails,"hospital details");
         const psychiatristDetails = await Psychiatrist.find({hospitalId});
-        // console.log(psychiatristDetails, "psych details");
         const patientDetails = await Patient.find({hospitalId});
-        // console.log(patientDetails,"patientDetails");
         let totalPatients=0;
         psychiatristDetails.map((psychiatrist)=>(
             totalPatients+=psychiatrist.patientCount
         ));
+
+        //creating response
         const response = {
             hospitalName:hospitalDetails[0].hospitalName,
             psychiatristCount:psychiatristDetails.length,

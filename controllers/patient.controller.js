@@ -14,29 +14,31 @@ const registerPatient = async (req, res) => {
     phoneNumber,
   } = req.body;
   try {
+    //Checking if hospital exist
     let hospitalId = await Hospital.find({ hospitalName: hospitalName });
-    // console.log(hospitalId,"hospitalId");
+    
     if (hospitalId.length) {
       hospitalId = hospitalId[0]["_id"];
-      // console.log(hospitalId,"if hospiId");
     } else {
+      //creating a new hospital document
       const hospital = new Hospital({
         hospitalName,
       });
       await hospital.save();
       hospitalId = await Hospital.find({ hospitalName: hospitalName });
       hospitalId = hospitalId._id;
-      // console.log(hospitalId,"hospital under else");
     }
+
+    //checking if psychiatrist exist
     let psychiatristId = await Psychiatrist.find({
       psychiatristName: psychiatristName,
     });
-    // console.log(psychiatristId,"psycid ");
     if (psychiatristId.length) {
       psychiatristId = psychiatristId[0]._id;
       psychiatristId.patientCount=psychiatristId.patientCount+1;
-      // console.log(psychiatristId,"if psyc");
     } else {
+
+      //creating a new pyschiatrist document
       const psychiatrist = new Psychiatrist({
         psychiatristName,
         hospitalId:hospitalId,
@@ -45,8 +47,8 @@ const registerPatient = async (req, res) => {
       await psychiatrist.save();
       psychiatristId = await Psychiatrist.find({psychiatristName:psychiatristName});
       psychiatristId=psychiatristId[0]._id;
-      // console.log(psychiatristId,"else pscy");
     }
+    //creating a new patient document
     const patient = new Patient({
       patientName,
       address,
@@ -57,7 +59,6 @@ const registerPatient = async (req, res) => {
       psychiatristId,
       hospitalId
     });
-    // console.log(patient);
     await patient.save();
     res.status(201).send({ message: "Patient Created Successfully" });
   } catch (error) {
