@@ -5,7 +5,8 @@ const psychiatristSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
-  psychiatristName: { type: String, required: true }
+  psychiatristName: { type: String, required: true },
+  patientCount:{type: Number, required:true}
 });
 
 const Psychiatrist = mongoose.model("psychiatrist", psychiatristSchema);

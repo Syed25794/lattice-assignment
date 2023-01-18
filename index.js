@@ -6,6 +6,8 @@ const patientRoutes = require("./routes/patient.routes");
 
 const connection = require("./config/database");
 
+const psychiatristRoutes = require("./routes/psychiatrist.routes");
+
 const app = express();
 
 dotenv.config();
@@ -15,6 +17,8 @@ const { PORT } = process.env;
 app.use(express.json());
 
 app.use("/patient",patientRoutes);
+
+app.use("/psychiatrist/",psychiatristRoutes);
 
 app.get("/",(req,res)=>{
     res.send("<h1>Welcome to Home Page.</h1>");

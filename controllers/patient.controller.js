@@ -15,10 +15,10 @@ const registerPatient = async (req, res) => {
   } = req.body;
   try {
     let hospitalId = await Hospital.find({ hospitalName: hospitalName });
-    console.log(hospitalId,"hospitalId");
+    // console.log(hospitalId,"hospitalId");
     if (hospitalId.length) {
       hospitalId = hospitalId[0]["_id"];
-      console.log(hospitalId,"if hospiId");
+      // console.log(hospitalId,"if hospiId");
     } else {
       const hospital = new Hospital({
         hospitalName,
@@ -26,24 +26,26 @@ const registerPatient = async (req, res) => {
       await hospital.save();
       hospitalId = await Hospital.find({ hospitalName: hospitalName });
       hospitalId = hospitalId._id;
-      console.log(hospitalId,"hospital under else");
+      // console.log(hospitalId,"hospital under else");
     }
     let psychiatristId = await Psychiatrist.find({
       psychiatristName: psychiatristName,
     });
-    console.log(psychiatristId,"psycid ");
+    // console.log(psychiatristId,"psycid ");
     if (psychiatristId.length) {
       psychiatristId = psychiatristId[0]._id;
-      console.log(psychiatristId,"if psyc");
+      psychiatristId.patientCount=psychiatristId.patientCount+1;
+      // console.log(psychiatristId,"if psyc");
     } else {
       const psychiatrist = new Psychiatrist({
         psychiatristName,
-        hospitalId:hospitalId
+        hospitalId:hospitalId,
+        patientCount:1
       });
       await psychiatrist.save();
       psychiatristId = await Psychiatrist.find({psychiatristName:psychiatristName});
       psychiatristId=psychiatristId[0]._id;
-      console.log(psychiatristId,"else pscy");
+      // console.log(psychiatristId,"else pscy");
     }
     const patient = new Patient({
       patientName,
@@ -52,9 +54,10 @@ const registerPatient = async (req, res) => {
       phoneNumber,
       password,
       patientPhoto,
-      psychiatristId
+      psychiatristId,
+      hospitalId
     });
-    console.log(patient);
+    // console.log(patient);
     await patient.save();
     res.status(201).send({ message: "Patient Created Successfully" });
   } catch (error) {

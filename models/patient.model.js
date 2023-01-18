@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const patientSchema = new mongoose.Schema({
+    hospitalId:{type:mongoose.Schema.Types.ObjectId, required:true},
     psychiatristId:{type:mongoose.Schema.Types.ObjectId, required:true},
     patientName: { type: String, required: true},
     address: { type: String, required: true , minLength: 10},
