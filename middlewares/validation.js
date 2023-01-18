@@ -48,10 +48,13 @@ const validateInputsPatient = (req,res,next)=>{
     next();
 }
 
-const getPsychiatristValidate=({hospitalId})=>{
+const getPsychiatristValidate=(req,res,next)=>{
+    const { hospitalId }= req.body;
+    console.log(hospitalId);
     if( !hospitalId ){
         return res.status(400).send({"error":"Hospital Id is required!"});
     }
+    next();
 }
 
 module.exports ={ getPsychiatristValidate,validateInputsPatient};
