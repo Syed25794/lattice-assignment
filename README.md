@@ -10,7 +10,10 @@ Here is the all libraries ,frameworks and module used in this assignemnt:
 
 This assignment has two api end points which are as follows:
 
-http://localhost:8080/patient/registration as post request.
+http://localhost:8080/patient/registration as post request as locally.
+
+Or 
+https://latticeinnovation.onrender.com/patient/registration as post request online.
 
 request.body={
 "hospitalName":"Apollo Hospitals",
@@ -24,7 +27,10 @@ request.body={
   }
   
   
-http://localhost:8080/psychiatrist/all as get request.
+http://localhost:8080/psychiatrist/all as get request as locally.
+
+Or
+https://latticeinnovation.onrender.com/psychiatrist/all as get request online.
 
 request.body={
 "hospitalId:"63c6c7df034812ea4cefd221"
