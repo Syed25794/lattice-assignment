@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const hospitalSchema = new mongoose.Schema({
-    hospitalName: { type: String, required: true } 
+    hospitalName: { type: String} 
 });
 
 const Hospital = mongoose.model("hospital", hospitalSchema);
