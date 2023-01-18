@@ -10,7 +10,7 @@ const validateInputsPatient = (req,res,next)=>{
         patientPhoto,
         phoneNumber,
       } = req.body;
-    // Validate the input
+    // Validating the inputs
     if(!hospitalName){
         return res.status(400).send({"error":"Hospital name is required!"});
     }
@@ -50,7 +50,8 @@ const validateInputsPatient = (req,res,next)=>{
 
 const getPsychiatristValidate=(req,res,next)=>{
     const { hospitalId }= req.body;
-    console.log(hospitalId);
+
+    //validating the hospital Id
     if( !hospitalId ){
         return res.status(400).send({"error":"Hospital Id is required!"});
     }

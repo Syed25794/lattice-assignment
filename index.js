@@ -16,6 +16,8 @@ const { PORT } = process.env;
 
 app.use(express.json());
 
+//Patient and psychiatrist routes
+
 app.use("/patient",patientRoutes);
 
 app.use("/psychiatrist/",psychiatristRoutes);

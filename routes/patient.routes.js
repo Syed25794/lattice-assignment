@@ -6,6 +6,7 @@ const { validateInputsPatient } = require("../middlewares/validation");
 
 const patientRoutes = Router();
 
+//patient registration route
 patientRoutes.post("/registration",validateInputsPatient,registerPatient);
 
 module.exports = patientRoutes;
